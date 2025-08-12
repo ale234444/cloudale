@@ -1,233 +1,176 @@
-/* Estilo general del body */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to right, #4facfe, #00f2fe);
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-}
-
-/* Título principal */
-h1 {
-  color: white;
-  margin-top: 40px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-/* Contenedor principal */
-#auth-container {
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  width: 90%;
-  max-width: 400px;
-  margin-top: 30px;
-}
-
-/* Títulos secundarios */
-#auth-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-/* Estilo inputs */
-input[type="email"],
-input[type="password"] {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+/* Reset básico */
+* {
   box-sizing: border-box;
-  font-size: 16px;
-}
-
-/* Botón */
-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #4facfe;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-button:hover {
-  background-color: #00c6ff;
-}
-/* ====== Estilo general ====== */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to right, #4facfe, #00f2fe);
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ====== Títulos ====== */
+/* Fondo y contenedor general */
+body {
+  background-color: #f5f7fa;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.container {
+  background-color: #fff;
+  width: 100%;
+  max-width: 900px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  padding: 30px 40px;
+}
+
+/* Títulos */
 h1 {
-  color: white;
-  margin-top: 40px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  font-weight: 700;
+  font-size: 2.2rem;
+  margin-bottom: 25px;
+  color: #222;
+  text-align: center;
+  letter-spacing: 1px;
 }
 
 h2 {
-  color: #333;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* ====== Contenedor de login/registro ====== */
-#auth-container {
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  width: 90%;
-  max-width: 400px;
-  margin-top: 30px;
-}
-
-/* ====== Inputs generales ====== */
-input[type="email"],
-input[type="password"],
-input[type="text"],
-select {
-  width: 100%;
-  padding: 12px;
+  font-weight: 600;
+  font-size: 1.4rem;
   margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-sizing: border-box;
-  font-size: 16px;
+  color: #444;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 8px;
 }
 
-/* ====== Botones generales ====== */
-button {
-  padding: 10px 15px;
-  background-color: #4facfe;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-button:hover {
-  background-color: #00c6ff;
-}
-
-/* ====== Texto y enlaces ====== */
-p {
-  text-align: center;
-  margin-top: 15px;
-}
-
-a {
-  color: #4facfe;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* ====== Contenedor principal del dashboard ====== */
-.container {
-  width: 95%;
-  max-width: 900px;
-  margin: 20px auto;
-}
-
-/* ====== Tarjetas (secciones) ====== */
-.card {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-/* ====== Lista de estudiantes ====== */
-#lista-estudiantes li {
-  background: white;
-  margin: 8px 0;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#lista-estudiantes button {
-  margin-left: 5px;
-  padding: 5px 8px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-/* Botón de editar */
-#lista-estudiantes button:first-of-type {
-  background-color: #ffc107;
-  color: white;
-}
-
-#lista-estudiantes button:first-of-type:hover {
-  background-color: #e0a800;
-}
-
-/* Botón de eliminar */
-#lista-estudiantes button:last-of-type {
-  background-color: #dc3545;
-  color: white;
-}
-
-#lista-estudiantes button:last-of-type:hover {
-  background-color: #c82333;
-}
-
-/* ====== Lista de archivos ====== */
-#lista-archivos li {
-  margin: 5px 0;
-}
-
-/* ====== Botón cerrar sesión ====== */
+/* Botón cerrar sesión */
 .cerrar-btn {
-  background-color: #ff4757;
+  background-color: #c0392b;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
   float: right;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  margin-bottom: 25px;
 }
 
 .cerrar-btn:hover {
-  background-color: #e84118;
+  background-color: #e74c3c;
 }
 
-/* Texto con enlace */
-p {
-  text-align: center;
-  margin-top: 15px;
+/* Secciones tipo card */
+.card {
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 25px 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.05);
 }
 
-a {
-  color: #4facfe;
-  text-decoration: none;
-  font-weight: bold;
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="file"],
+select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease;
 }
 
-a:hover {
-  text-decoration: underline;
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="file"]:focus,
+select:focus {
+  border-color: #2980b9;
+  outline: none;
+}
+
+/* Botón agregar/actualizar y subir archivo */
+button {
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+button:hover {
+  background-color: #3498db;
+}
+
+/* Lista de estudiantes */
+#lista-estudiantes {
+  list-style: none;
+}
+
+#lista-estudiantes li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid #ddd;
+  font-size: 1rem;
+  color: #444;
+}
+
+#lista-estudiantes li div button {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 12px;
+  transition: color 0.3s ease;
+}
+
+#lista-estudiantes li div button:hover {
+  color: #2980b9;
+}
+
+/* Lista archivos */
+#lista-archivos {
+  list-style: none;
+}
+
+#lista-archivos li {
+  margin-bottom: 15px;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px 15px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  button, input, select {
+    font-size: 0.9rem;
+  }
+
+  #lista-estudiantes li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #lista-estudiantes li div {
+    margin-top: 8px;
+  }
 }
