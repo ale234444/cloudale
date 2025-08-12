@@ -3,10 +3,18 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
 const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+let idEnEdicion = null; // Guardar el ID cuando editamos
+
+// Agregar o actualizar estudiante
 async function agregarEstudiante() {
-  const nombre = document.getElementById("nombre").value;
-  const correo = document.getElementById("correo").value;
-  const clase = document.getElementById("clase").value;
+  const nombre = document.getElementById("nombre").value.trim();
+  const correo = document.getElementById("correo").value.trim();
+  const clase = document.getElementById("clase").value.trim();
+
+  if (!nombre || !correo || !clase) {
+    alert("Por favor completa todos los campos.");
+    return;
+  }
 
   const {
     data: { user },
@@ -18,21 +26,49 @@ async function agregarEstudiante() {
     return;
   }
 
-  const { error } = await client.from("estudiantes").insert({
-    nombre,
-    correo,
-    clase,
-    user_id: user.id,
-  });
+  if (idEnEdicion) {
+    // Actualizar estudiante
+    const { error } = await client
+      .from("estudiantes")
+      .update({ nombre, correo, clase })
+      .eq("id", idEnEdicion);
 
-  if (error) {
-    alert("Error al agregar: " + error.message);
+    if (error) {
+      alert("Error al actualizar: " + error.message);
+    } else {
+      alert("Estudiante actualizado");
+      idEnEdicion = null;
+      document.querySelector("#form-estudiante button").textContent = "Agregar";
+      limpiarFormulario();
+      cargarEstudiantes();
+    }
   } else {
-    alert("Estudiante agregado");
-    cargarEstudiantes();
+    // Agregar nuevo estudiante
+    const { error } = await client.from("estudiantes").insert({
+      nombre,
+      correo,
+      clase,
+      user_id: user.id,
+    });
+
+    if (error) {
+      alert("Error al agregar: " + error.message);
+    } else {
+      alert("Estudiante agregado");
+      limpiarFormulario();
+      cargarEstudiantes();
+    }
   }
 }
 
+// Limpiar inputs
+function limpiarFormulario() {
+  document.getElementById("nombre").value = "";
+  document.getElementById("correo").value = "";
+  document.getElementById("clase").value = "";
+}
+
+// Cargar lista de estudiantes
 async function cargarEstudiantes() {
   const { data, error } = await client
     .from("estudiantes")
@@ -48,13 +84,44 @@ async function cargarEstudiantes() {
   lista.innerHTML = "";
   data.forEach((est) => {
     const item = document.createElement("li");
-    item.textContent = `${est.nombre} (${est.clase})`;
+    item.innerHTML = `
+      ${est.nombre} (${est.clase})
+      <div>
+        <button onclick="editarEstudiante('${est.id}', '${est.nombre}', '${est.correo}', '${est.clase}')">✏️</button>
+        <button onclick="eliminarEstudiante('${est.id}')">🗑️</button>
+      </div>
+    `;
     lista.appendChild(item);
   });
 }
 
-cargarEstudiantes();
+// Editar estudiante
+function editarEstudiante(id, nombre, correo, clase) {
+  document.getElementById("nombre").value = nombre;
+  document.getElementById("correo").value = correo;
+  document.getElementById("clase").value = clase;
+  idEnEdicion = id;
+  document.querySelector("#form-estudiante button").textContent = "Actualizar";
+}
 
+// Eliminar estudiante
+async function eliminarEstudiante(id) {
+  if (!confirm("¿Seguro que quieres eliminar este estudiante?")) return;
+
+  const { error } = await client
+    .from("estudiantes")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    alert("Error al eliminar: " + error.message);
+  } else {
+    alert("Estudiante eliminado");
+    cargarEstudiantes();
+  }
+}
+
+// Subir archivo
 async function subirArchivo() {
   const archivoInput = document.getElementById("archivo");
   const archivo = archivoInput.files[0];
@@ -75,7 +142,7 @@ async function subirArchivo() {
   }
 
   const nombreRuta = `${user.id}/${archivo.name}`;
-  const { data, error } = await client.storage
+  const { error } = await client.storage
     .from("tareas")
     .upload(nombreRuta, archivo, {
       cacheControl: "3600",
@@ -90,6 +157,7 @@ async function subirArchivo() {
   }
 }
 
+// Listar archivos
 async function listarArchivos() {
   const {
     data: { user },
@@ -124,7 +192,6 @@ async function listarArchivos() {
     }
 
     const publicUrl = signedUrlData.signedUrl;
-
     const item = document.createElement("li");
 
     const esImagen = archivo.name.match(/\.(jpg|jpeg|png|gif)$/i);
@@ -150,8 +217,7 @@ async function listarArchivos() {
   });
 }
 
-listarArchivos();
-
+// Cerrar sesión
 async function cerrarSesion() {
   const { error } = await client.auth.signOut();
 
@@ -163,3 +229,6 @@ async function cerrarSesion() {
     window.location.href = "index.html";
   }
 }
+
+cargarEstudiantes();
+listarArchivos();
