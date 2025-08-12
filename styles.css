@@ -1,83 +1,176 @@
-/* Contenedor central más estrecho y menos padding */
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Fondo y contenedor general */
+body {
+  background-color: #f5f7fa;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
 .container {
-  background-color: #1c2833;
-  border-radius: 14px;
+  background-color: #fff;
   width: 100%;
-  max-width: 720px;  /* Antes 950px, ahora más pequeño */
-  box-shadow: 0 8px 25px rgba(0,0,0,0.7);
-  padding: 25px 30px; /* Antes 40px 50px, menos espacio */
-  border: 1px solid #34495e;
-}
-
-/* Secciones tipo card más compactas */
-.card {
-  background: #273746;
+  max-width: 900px;
   border-radius: 12px;
-  padding: 20px 25px; /* Antes 30px 35px */
-  margin-bottom: 30px; /* Un poco menos espacio entre secciones */
-  box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.05);
-  border: 1px solid #34495e;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  padding: 30px 40px;
 }
 
-/* Inputs y selects con menos padding */
+/* Títulos */
+h1 {
+  font-weight: 700;
+  font-size: 2.2rem;
+  margin-bottom: 25px;
+  color: #222;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  color: #444;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 8px;
+}
+
+/* Botón cerrar sesión */
+.cerrar-btn {
+  background-color: #c0392b;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  float: right;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  margin-bottom: 25px;
+}
+
+.cerrar-btn:hover {
+  background-color: #e74c3c;
+}
+
+/* Secciones tipo card */
+.card {
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 25px 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+}
+
+/* Inputs */
 input[type="text"],
 input[type="email"],
 input[type="file"],
 select {
   width: 100%;
-  padding: 10px 14px; /* Antes 14px 18px */
-  margin-bottom: 18px; /* Antes 22px */
-  border-radius: 10px;
-  border: 1.8px solid #3b5998;
-  background-color: #1a252f;
-  color: #ecf0f1;
-  font-size: 1.05rem; /* Un poquito más pequeño */
-  transition: border-color 0.3s ease, background-color 0.3s ease;
-  box-shadow: inset 2px 2px 5px rgba(255,255,255,0.1);
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease;
 }
 
-/* Botones un poco más pequeños */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="file"]:focus,
+select:focus {
+  border-color: #2980b9;
+  outline: none;
+}
+
+/* Botón agregar/actualizar y subir archivo */
 button {
   background-color: #2980b9;
-  color: #ecf0f1;
-  font-weight: 700;
-  font-size: 1rem; /* Antes 1.1rem */
-  padding: 12px 22px; /* Antes 14px 26px */
+  color: white;
   border: none;
-  border-radius: 10px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(41,128,185,0.7);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  user-select: none;
+  transition: background-color 0.3s ease;
+  display: inline-block;
 }
 
-/* Lista de estudiantes menos alta */
+button:hover {
+  background-color: #3498db;
+}
+
+/* Lista de estudiantes */
 #lista-estudiantes {
-  max-height: 250px; /* Antes 320px */
-  padding-right: 6px;
+  list-style: none;
 }
 
-/* Lista de archivos menos alta */
+#lista-estudiantes li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid #ddd;
+  font-size: 1rem;
+  color: #444;
+}
+
+#lista-estudiantes li div button {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 12px;
+  transition: color 0.3s ease;
+}
+
+#lista-estudiantes li div button:hover {
+  color: #2980b9;
+}
+
+/* Lista archivos */
 #lista-archivos {
-  max-height: 180px; /* Antes 250px */
-  padding-right: 6px;
+  list-style: none;
 }
 
-/* Titulos con menos margen */
-h1 {
-  margin-bottom: 25px; /* Antes 30px */
-  font-size: 2.3rem; /* Un poco más pequeño */
+#lista-archivos li {
+  margin-bottom: 15px;
+  font-size: 1rem;
+  color: #555;
 }
 
-h2 {
-  margin-bottom: 15px; /* Antes 18px */
-  font-size: 1.4rem; /* Antes 1.6rem */
-}
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px 15px;
+  }
 
-/* Botón cerrar sesión más pequeño */
-.cerrar-btn {
-  padding: 10px 20px; /* Antes 12px 24px */
-  font-size: 0.95rem; /* Un poco más pequeño */
-  margin-bottom: 25px; /* Antes 35px */
-  float: right;
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  button, input, select {
+    font-size: 0.9rem;
+  }
+
+  #lista-estudiantes li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #lista-estudiantes li div {
+    margin-top: 8px;
+  }
 }
