@@ -3,10 +3,12 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
 const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-let idEnEdicion = null; // Guardar el ID cuando editamos
+let idEnEdicion = null; // Guarda ID para edición
 
-// Agregar o actualizar estudiante
-async function agregarEstudiante() {
+const btnAgregarActualizar = document.getElementById("btnAgregarActualizar");
+btnAgregarActualizar.addEventListener("click", agregarOActualizarEstudiante);
+
+async function agregarOActualizarEstudiante() {
   const nombre = document.getElementById("nombre").value.trim();
   const correo = document.getElementById("correo").value.trim();
   const clase = document.getElementById("clase").value.trim();
@@ -38,13 +40,13 @@ async function agregarEstudiante() {
     } else {
       alert("Estudiante actualizado");
       idEnEdicion = null;
-      document.querySelector("#form-estudiante button").textContent = "Agregar";
+      btnAgregarActualizar.textContent = "Agregar";
       limpiarFormulario();
       cargarEstudiantes();
       cargarEstudiantesSelect();
     }
   } else {
-    // Agregar nuevo estudiante
+    // Agregar estudiante
     const { error } = await client.from("estudiantes").insert({
       nombre,
       correo,
@@ -63,14 +65,12 @@ async function agregarEstudiante() {
   }
 }
 
-// Limpiar inputs
 function limpiarFormulario() {
   document.getElementById("nombre").value = "";
   document.getElementById("correo").value = "";
   document.getElementById("clase").value = "";
 }
 
-// Cargar lista de estudiantes
 async function cargarEstudiantes() {
   const { data, error } = await client
     .from("estudiantes")
@@ -84,12 +84,13 @@ async function cargarEstudiantes() {
 
   const lista = document.getElementById("lista-estudiantes");
   lista.innerHTML = "";
+
   data.forEach((est) => {
     const item = document.createElement("li");
     item.innerHTML = `
       ${est.nombre} (${est.clase})
       <div>
-        <button onclick="editarEstudiante('${est.id}', '${est.nombre}', '${est.correo}', '${est.clase}')">✏️</button>
+        <button onclick="editarEstudiante('${est.id}', '${escapeHTML(est.nombre)}', '${escapeHTML(est.correo)}', '${escapeHTML(est.clase)}')">✏️</button>
         <button onclick="eliminarEstudiante('${est.id}')">🗑️</button>
       </div>
     `;
@@ -97,7 +98,33 @@ async function cargarEstudiantes() {
   });
 }
 
-// Cargar estudiantes en el select para subir archivos
+// Para evitar inyección, escapa texto que se va a insertar en el HTML
+function escapeHTML(text) {
+  return text.replace(/'/g, "\\'").replace(/"/g, "&quot;");
+}
+
+function editarEstudiante(id, nombre, correo, clase) {
+  document.getElementById("nombre").value = nombre;
+  document.getElementById("correo").value = correo;
+  document.getElementById("clase").value = clase;
+  idEnEdicion = id;
+  btnAgregarActualizar.textContent = "Actualizar";
+}
+
+async function eliminarEstudiante(id) {
+  if (!confirm("¿Seguro que quieres eliminar este estudiante?")) return;
+
+  const { error } = await client.from("estudiantes").delete().eq("id", id);
+
+  if (error) {
+    alert("Error al eliminar: " + error.message);
+  } else {
+    alert("Estudiante eliminado");
+    cargarEstudiantes();
+    cargarEstudiantesSelect();
+  }
+}
+
 async function cargarEstudiantesSelect() {
   const { data, error } = await client
     .from("estudiantes")
@@ -120,34 +147,6 @@ async function cargarEstudiantesSelect() {
   });
 }
 
-// Editar estudiante
-function editarEstudiante(id, nombre, correo, clase) {
-  document.getElementById("nombre").value = nombre;
-  document.getElementById("correo").value = correo;
-  document.getElementById("clase").value = clase;
-  idEnEdicion = id;
-  document.querySelector("#form-estudiante button").textContent = "Actualizar";
-}
-
-// Eliminar estudiante
-async function eliminarEstudiante(id) {
-  if (!confirm("¿Seguro que quieres eliminar este estudiante?")) return;
-
-  const { error } = await client
-    .from("estudiantes")
-    .delete()
-    .eq("id", id);
-
-  if (error) {
-    alert("Error al eliminar: " + error.message);
-  } else {
-    alert("Estudiante eliminado");
-    cargarEstudiantes();
-    cargarEstudiantesSelect();
-  }
-}
-
-// Subir archivo
 async function subirArchivo() {
   const archivoInput = document.getElementById("archivo");
   const archivo = archivoInput.files[0];
@@ -174,12 +173,10 @@ async function subirArchivo() {
   }
 
   const nombreRuta = `${user.id}/${estudianteSeleccionado}/${archivo.name}`;
-  const { error } = await client.storage
-    .from("tareas")
-    .upload(nombreRuta, archivo, {
-      cacheControl: "3600",
-      upsert: false,
-    });
+  const { error } = await client.storage.from("tareas").upload(nombreRuta, archivo, {
+    cacheControl: "3600",
+    upsert: false,
+  });
 
   if (error) {
     alert("Error al subir: " + error.message);
@@ -189,7 +186,6 @@ async function subirArchivo() {
   }
 }
 
-// Listar archivos
 async function listarArchivos() {
   const {
     data: { user },
@@ -201,9 +197,7 @@ async function listarArchivos() {
     return;
   }
 
-  const { data: archivos, error: listarError } = await client.storage
-    .from("tareas")
-    .list(`${user.id}`, { limit: 20 });
+  const { data: archivos, error: listarError } = await client.storage.from("tareas").list(`${user.id}`, { limit: 20 });
 
   const lista = document.getElementById("lista-archivos");
   lista.innerHTML = "";
@@ -214,9 +208,7 @@ async function listarArchivos() {
   }
 
   archivos.forEach(async (archivo) => {
-    const { data: signedUrlData, error: signedUrlError } = await client.storage
-      .from("tareas")
-      .createSignedUrl(`${user.id}/${archivo.name}`, 60);
+    const { data: signedUrlData, error: signedUrlError } = await client.storage.from("tareas").createSignedUrl(`${user.id}/${archivo.name}`, 60);
 
     if (signedUrlError) {
       console.error("Error al generar URL firmada:", signedUrlError.message);
@@ -249,7 +241,6 @@ async function listarArchivos() {
   });
 }
 
-// Cerrar sesión
 async function cerrarSesion() {
   const { error } = await client.auth.signOut();
 
@@ -262,7 +253,7 @@ async function cerrarSesion() {
   }
 }
 
-// Inicialización al cargar la página
+// Al cargar la página
 cargarEstudiantes();
 cargarEstudiantesSelect();
 listarArchivos();
