@@ -1,176 +1,168 @@
-/* Reset básico */
-* {
-  box-sizing: border-box;
+/* Estilo general del body */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Fondo y contenedor general */
-body {
-  background-color: #f5f7fa;
-  color: #333;
-  min-height: 100vh;
   display: flex;
-  justify-content: center;
-  padding: 40px 20px;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
 }
 
-.container {
-  background-color: #fff;
+/* Contenedor principal para login y dashboard */
+#auth-container, .container {
+  background-color: #1c2833;
+  border-radius: 14px;
   width: 100%;
-  max-width: 900px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  padding: 30px 40px;
-}
-
-/* Títulos */
-h1 {
-  font-weight: 700;
-  font-size: 2.2rem;
-  margin-bottom: 25px;
-  color: #222;
-  text-align: center;
-  letter-spacing: 1px;
-}
-
-h2 {
-  font-weight: 600;
-  font-size: 1.4rem;
-  margin-bottom: 15px;
-  color: #444;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 8px;
-}
-
-/* Botón cerrar sesión */
-.cerrar-btn {
-  background-color: #c0392b;
-  color: white;
-  padding: 10px 18px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  float: right;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
-  margin-bottom: 25px;
-}
-
-.cerrar-btn:hover {
-  background-color: #e74c3c;
-}
-
-/* Secciones tipo card */
-.card {
-  background-color: #fafafa;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  max-width: 400px;  /* Para login menos ancho */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
   padding: 25px 30px;
-  margin-bottom: 30px;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+  border: 1px solid #34495e;
+  margin: 30px 10px;
 }
 
-/* Inputs */
+/* Para dashboard container más ancho */
+.container {
+  max-width: 720px;
+}
+
+/* Título principal */
+h1 {
+  color: #ecf0f1;
+  margin-bottom: 25px;
+  font-size: 2.3rem;
+  text-align: center;
+}
+
+/* Subtítulos */
+h2 {
+  color: #ecf0f1;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+/* Inputs y selects compactos */
 input[type="text"],
 input[type="email"],
+input[type="password"],
 input[type="file"],
 select {
   width: 100%;
-  padding: 12px 14px;
-  border-radius: 8px;
-  border: 1.5px solid #ccc;
-  font-size: 1rem;
-  margin-bottom: 20px;
-  transition: border-color 0.3s ease;
+  padding: 10px 14px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  border: 1.8px solid #3b5998;
+  background-color: #1a252f;
+  color: #ecf0f1;
+  font-size: 1.05rem;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.1);
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="file"]:focus,
-select:focus {
-  border-color: #2980b9;
-  outline: none;
-}
-
-/* Botón agregar/actualizar y subir archivo */
+/* Botones elegantes y compactos */
 button {
   background-color: #2980b9;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-weight: 600;
+  color: #ecf0f1;
+  font-weight: 700;
   font-size: 1rem;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: inline-block;
+  box-shadow: 0 5px 15px rgba(41, 128, 185, 0.7);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+  width: 100%;
 }
 
-button:hover {
-  background-color: #3498db;
+/* Botón cerrar sesión pequeño */
+.cerrar-btn {
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  margin-bottom: 25px;
+  float: right;
 }
 
-/* Lista de estudiantes */
-#lista-estudiantes {
-  list-style: none;
+/* Texto y enlaces centrados */
+p {
+  text-align: center;
+  margin-top: 10px;
+  color: #ecf0f1;
 }
 
+a {
+  color: #4facfe;
+  font-weight: bold;
+  text-decoration: none;
+  transition: text-decoration 0.3s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Listas con scroll limitado */
+#lista-estudiantes, #lista-archivos {
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 6px;
+  color: #ecf0f1;
+  margin-top: 15px;
+}
+
+/* Lista de estudiantes estilo */
 #lista-estudiantes li {
+  background-color: #34495e;
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 16px;
-  border-bottom: 1px solid #ddd;
-  font-size: 1rem;
-  color: #444;
+  font-weight: 600;
+  color: #ecf0f1;
 }
 
+/* Botones en lista */
 #lista-estudiantes li div button {
-  background: transparent;
+  margin-left: 6px;
+  font-size: 1.1rem;
+  padding: 4px 8px;
+  border-radius: 6px;
   border: none;
-  font-size: 1.2rem;
   cursor: pointer;
-  margin-left: 12px;
-  transition: color 0.3s ease;
+  background-color: #3498db;
+  color: white;
+  transition: background-color 0.3s ease;
 }
 
 #lista-estudiantes li div button:hover {
-  color: #2980b9;
+  background-color: #2980b9;
 }
 
-/* Lista archivos */
-#lista-archivos {
-  list-style: none;
-}
-
+/* Lista archivos estilo */
 #lista-archivos li {
-  margin-bottom: 15px;
-  font-size: 1rem;
-  color: #555;
+  margin-bottom: 10px;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .container {
-    padding: 20px 15px;
-  }
+/* Enlaces en lista archivos */
+#lista-archivos a {
+  color: #00aced;
+  text-decoration: none;
+}
 
-  h1 {
-    font-size: 1.8rem;
-  }
+#lista-archivos a:hover {
+  text-decoration: underline;
+}
 
-  button, input, select {
-    font-size: 0.9rem;
-  }
-
-  #lista-estudiantes li {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  #lista-estudiantes li div {
-    margin-top: 8px;
-  }
+/* Imagenes en lista archivos */
+#lista-archivos img {
+  border: 1px solid #ccc;
+  margin: 5px 0;
+  border-radius: 6px;
+  max-width: 150px;
+  height: auto;
+  display: block;
 }
