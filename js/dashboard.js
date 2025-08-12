@@ -41,6 +41,7 @@ async function agregarEstudiante() {
       document.querySelector("#form-estudiante button").textContent = "Agregar";
       limpiarFormulario();
       cargarEstudiantes();
+      cargarEstudiantesSelect();
     }
   } else {
     // Agregar nuevo estudiante
@@ -57,6 +58,7 @@ async function agregarEstudiante() {
       alert("Estudiante agregado");
       limpiarFormulario();
       cargarEstudiantes();
+      cargarEstudiantesSelect();
     }
   }
 }
@@ -95,6 +97,29 @@ async function cargarEstudiantes() {
   });
 }
 
+// Cargar estudiantes en el select para subir archivos
+async function cargarEstudiantesSelect() {
+  const { data, error } = await client
+    .from("estudiantes")
+    .select("id, nombre")
+    .order("nombre", { ascending: true });
+
+  if (error) {
+    console.error("Error al cargar estudiantes para select:", error.message);
+    return;
+  }
+
+  const select = document.getElementById("estudiante");
+  select.innerHTML = "";
+
+  data.forEach((est) => {
+    const option = document.createElement("option");
+    option.value = est.id;
+    option.textContent = est.nombre;
+    select.appendChild(option);
+  });
+}
+
 // Editar estudiante
 function editarEstudiante(id, nombre, correo, clase) {
   document.getElementById("nombre").value = nombre;
@@ -118,6 +143,7 @@ async function eliminarEstudiante(id) {
   } else {
     alert("Estudiante eliminado");
     cargarEstudiantes();
+    cargarEstudiantesSelect();
   }
 }
 
@@ -141,7 +167,13 @@ async function subirArchivo() {
     return;
   }
 
-  const nombreRuta = `${user.id}/${archivo.name}`;
+  const estudianteSeleccionado = document.getElementById("estudiante").value;
+  if (!estudianteSeleccionado) {
+    alert("Selecciona un estudiante para subir el archivo.");
+    return;
+  }
+
+  const nombreRuta = `${user.id}/${estudianteSeleccionado}/${archivo.name}`;
   const { error } = await client.storage
     .from("tareas")
     .upload(nombreRuta, archivo, {
@@ -230,5 +262,7 @@ async function cerrarSesion() {
   }
 }
 
+// Inicialización al cargar la página
 cargarEstudiantes();
+cargarEstudiantesSelect();
 listarArchivos();

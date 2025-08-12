@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Panel - Estudiantes</title>
   <link rel="stylesheet" href="styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -9,9 +10,9 @@
   <div class="container">
 
     <h1>Panel de Estudiantes</h1>
-<button onclick="cerrarSesion()" class="cerrar-btn">Cerrar sesión</button>
+    <button onclick="cerrarSesion()" class="cerrar-btn">Cerrar sesión</button>
   
-    <section class="card">
+    <section class="card" id="form-estudiante">
       <h2>Registrar estudiante</h2>
       <input type="text" id="nombre" placeholder="Nombre del estudiante" />
       <input type="email" id="correo" placeholder="Correo" />
@@ -19,7 +20,6 @@
       <button onclick="agregarEstudiante()">Agregar</button>
     </section>
 
-   
     <section class="card">
       <h2>Lista de estudiantes</h2>
       <ul id="lista-estudiantes"></ul>
@@ -39,8 +39,7 @@
       <ul id="lista-archivos"></ul>
     </section>
 
-    </div>
+  </div>
   <script src="js/dashboard.js"></script>
 </body>
 </html>
-
