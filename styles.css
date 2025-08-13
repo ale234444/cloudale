@@ -12,13 +12,13 @@ body {
 
 /* Contenedor principal para login y dashboard */
 #auth-container, .container {
-  background-color: #1c2833;
+  background-color: #27c9df;
   border-radius: 14px;
   width: 100%;
   max-width: 400px;  /* Para login menos ancho */
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 8px 25px rgba(9, 205, 231, 0.7);
   padding: 25px 30px;
-  border: 1px solid #34495e;
+  border: 1px solid #14dac9;
   margin: 30px 10px;
 }
 
@@ -54,11 +54,11 @@ select {
   margin-bottom: 18px;
   border-radius: 10px;
   border: 1.8px solid #3b5998;
-  background-color: #1a252f;
+  background-color: #18b5d1;
   color: #ecf0f1;
   font-size: 1.05rem;
   transition: border-color 0.3s ease, background-color 0.3s ease;
-  box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 2px 2px 5px rgba(51, 185, 209, 0.1);
 }
 
 /* Botones elegantes y compactos */
