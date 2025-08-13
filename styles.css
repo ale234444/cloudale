@@ -1,86 +1,168 @@
-/* ====== Estilos generales ====== */
+/* Estilo general del body */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #e3f2fd, #ffffff);
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
 }
 
-/* ====== Contenedor principal ====== */
-.login-container {
-    background: #ffffff;
-    padding: 25px 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    width: 320px;
-    animation: fadeIn 0.4s ease-in-out;
+/* Contenedor principal para login y dashboard */
+#auth-container, .container {
+  background-color: #27c9df;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 400px;  /* Para login menos ancho */
+  box-shadow: 0 8px 25px rgba(9, 205, 231, 0.7);
+  padding: 25px 30px;
+  border: 1px solid #345e5b;
+  margin: 30px 10px;
 }
 
-/* ====== Título ====== */
-.login-container h2 {
-    text-align: center;
-    margin-bottom: 15px;
-    color: #1a237e;
-    font-weight: 600;
+/* Para dashboard container más ancho */
+.container {
+  max-width: 720px;
 }
 
-/* ====== Campos de entrada ====== */
-.login-container input[type="text"],
-.login-container input[type="password"] {
-    width: 100%;
-    padding: 8px 12px;
-    margin-bottom: 12px;
-    border: 1px solid #cfd8dc;
-    border-radius: 6px;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    background-color: #fafafa;
+/* Título principal */
+h1 {
+  color: #ecf0f1;
+  margin-bottom: 25px;
+  font-size: 2.3rem;
+  text-align: center;
 }
 
-.login-container input[type="text"]:focus,
-.login-container input[type="password"]:focus {
-    border-color: #1976d2;
-    outline: none;
-    background-color: #ffffff;
+/* Subtítulos */
+h2 {
+  color: #ecf0f1;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  text-align: center;
 }
 
-/* ====== Botón ====== */
-.login-container button {
-    width: 100%;
-    padding: 8px 0;
-    background-color: #1976d2;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 15px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+/* Inputs y selects compactos */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"],
+select {
+  width: 100%;
+  padding: 10px 14px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  border: 1.8px solid #3b5998;
+  background-color: #1a252f;
+  color: #ecf0f1;
+  font-size: 1.05rem;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.1);
 }
 
-.login-container button:hover {
-    background-color: #0d47a1;
+/* Botones elegantes y compactos */
+button {
+  background-color: #2980b9;
+  color: #ecf0f1;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(41, 128, 185, 0.7);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+  width: 100%;
 }
 
-/* ====== Texto pequeño ====== */
-.login-container p {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 13px;
-    color: #546e7a;
+/* Botón cerrar sesión pequeño */
+.cerrar-btn {
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  margin-bottom: 25px;
+  float: right;
 }
 
-/* Animación de entrada */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Texto y enlaces centrados */
+p {
+  text-align: center;
+  margin-top: 10px;
+  color: #ecf0f1;
+}
+
+a {
+  color: #4facfe;
+  font-weight: bold;
+  text-decoration: none;
+  transition: text-decoration 0.3s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Listas con scroll limitado */
+#lista-estudiantes, #lista-archivos {
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 6px;
+  color: #ecf0f1;
+  margin-top: 15px;
+}
+
+/* Lista de estudiantes estilo */
+#lista-estudiantes li {
+  background-color: #34495e;
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: #ecf0f1;
+}
+
+/* Botones en lista */
+#lista-estudiantes li div button {
+  margin-left: 6px;
+  font-size: 1.1rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background-color: #3498db;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+#lista-estudiantes li div button:hover {
+  background-color: #2980b9;
+}
+
+/* Lista archivos estilo */
+#lista-archivos li {
+  margin-bottom: 10px;
+}
+
+/* Enlaces en lista archivos */
+#lista-archivos a {
+  color: #00aced;
+  text-decoration: none;
+}
+
+#lista-archivos a:hover {
+  text-decoration: underline;
+}
+
+/* Imagenes en lista archivos */
+#lista-archivos img {
+  border: 1px solid #ccc;
+  margin: 5px 0;
+  border-radius: 6px;
+  max-width: 150px;
+  height: auto;
+  display: block;
 }
