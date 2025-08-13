@@ -1,168 +1,77 @@
-/* Estilo general del body */
+/* Fondo general */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to right, #4facfe, #00f2fe);
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
 }
 
-/* Contenedor principal para login y dashboard */
-#auth-container, .container {
-  background-color: #e3edee;
-  border-radius: 14px;
+/* Contenedor del login */
+#auth-container {
+  background-color: #fff;
+  border-radius: 12px;
   width: 100%;
-  max-width: 400px;  /* Para login menos ancho */
-  box-shadow: 0 8px 25px rgba(9, 205, 231, 0.7);
-  padding: 25px 30px;
-  border: 1px solid #345e5b;
-  margin: 30px 10px;
+  max-width: 360px;
+  padding: 30px 25px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  text-align: center;
 }
 
-/* Para dashboard container más ancho */
-.container {
-  max-width: 720px;
-}
-
-/* Título principal */
-h1 {
-  color: #ecf0f1;
+/* Título */
+#auth-container h1 {
+  color: #222;
+  font-size: 1.6rem;
   margin-bottom: 25px;
-  font-size: 2.3rem;
-  text-align: center;
 }
 
-/* Subtítulos */
-h2 {
-  color: #ecf0f1;
-  margin-bottom: 15px;
-  font-size: 1.4rem;
-  text-align: center;
-}
-
-/* Inputs y selects compactos */
-input[type="text"],
+/* Campos de entrada */
 input[type="email"],
-input[type="password"],
-input[type="file"],
-select {
+input[type="password"] {
   width: 100%;
   padding: 10px 14px;
-  margin-bottom: 18px;
-  border-radius: 10px;
-  border: 1.8px solid #3b5998;
-  background-color: #1a252f;
-  color: #ecf0f1;
-  font-size: 1.05rem;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
-  box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.1);
-}
-
-/* Botones elegantes y compactos */
-button {
-  background-color: #2980b9;
-  color: #ecf0f1;
-  font-weight: 700;
-  font-size: 1rem;
-  padding: 12px 22px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(41, 128, 185, 0.7);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  user-select: none;
-  width: 100%;
-}
-
-/* Botón cerrar sesión pequeño */
-.cerrar-btn {
-  padding: 10px 20px;
-  font-size: 0.95rem;
-  margin-bottom: 25px;
-  float: right;
-}
-
-/* Texto y enlaces centrados */
-p {
-  text-align: center;
-  margin-top: 10px;
-  color: #ecf0f1;
-}
-
-a {
-  color: #4facfe;
-  font-weight: bold;
-  text-decoration: none;
-  transition: text-decoration 0.3s ease;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Listas con scroll limitado */
-#lista-estudiantes, #lista-archivos {
-  max-height: 250px;
-  overflow-y: auto;
-  padding-right: 6px;
-  color: #ecf0f1;
-  margin-top: 15px;
-}
-
-/* Lista de estudiantes estilo */
-#lista-estudiantes li {
-  background-color: #34495e;
-  margin-bottom: 8px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  color: #ecf0f1;
-}
-
-/* Botones en lista */
-#lista-estudiantes li div button {
-  margin-left: 6px;
-  font-size: 1.1rem;
-  padding: 4px 8px;
+  margin-bottom: 15px;
   border-radius: 6px;
   border: none;
-  cursor: pointer;
-  background-color: #3498db;
+  background-color: #1a1a1a;
   color: white;
+  font-size: 1rem;
+}
+
+/* Botón iniciar sesión */
+button {
+  background-color: #7b2cbf;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
   transition: background-color 0.3s ease;
 }
 
-#lista-estudiantes li div button:hover {
-  background-color: #2980b9;
+button:hover {
+  background-color: #5a189a;
 }
 
-/* Lista archivos estilo */
-#lista-archivos li {
-  margin-bottom: 10px;
+/* Texto inferior */
+p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 15px;
 }
 
-/* Enlaces en lista archivos */
-#lista-archivos a {
-  color: #00aced;
+p a {
+  color: #7b2cbf;
   text-decoration: none;
+  font-weight: 600;
 }
 
-#lista-archivos a:hover {
+p a:hover {
   text-decoration: underline;
-}
-
-/* Imagenes en lista archivos */
-#lista-archivos img {
-  border: 1px solid #ccc;
-  margin: 5px 0;
-  border-radius: 6px;
-  max-width: 150px;
-  height: auto;
-  display: block;
 }
